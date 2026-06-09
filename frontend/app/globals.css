@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0d0d14;
+  --coral: #ff5c47;
+  --gold: #f5c842;
+  --slate: #6b7a99;
+  --mist: #e8eaf2;
+  --surface: #f4f5fa;
+  --card: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background-color: var(--surface);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Display Font via CSS ─── */
+.font-display {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* ─── Layout ─── */
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ─── Card ─── */
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1.5px solid #e2e4ef;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.card:hover {
+  border-color: var(--coral);
+  box-shadow: 0 8px 32px rgba(255, 92, 71, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ─── Buttons ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--coral);
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: #e8432e;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 92, 71, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: white;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  border: 1.5px solid #e2e4ef;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  border-color: var(--coral);
+  color: var(--coral);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+}
+
+/* ─── Dropzone ─── */
+.dropzone {
+  border: 2px dashed #c8cce0;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  background: #fafbff;
+  position: relative;
+  overflow: hidden;
+}
+
+.dropzone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,92,71,0.04) 0%, rgba(245,200,66,0.04) 100%);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.dropzone:hover,
+.dropzone.active {
+  border-color: var(--coral);
+  background: #fff8f7;
+}
+
+.dropzone:hover::before,
+.dropzone.active::before {
+  opacity: 1;
+}
+
+/* ─── Inputs & Selects ─── */
+.form-input {
+  width: 100%;
+  background: white;
+  border: 1.5px solid #e2e4ef;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--ink);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px rgba(255, 92, 71, 0.12);
+}
+
+.form-input::placeholder {
+  color: #9ba3be;
+}
+
+/* ─── Tags / Pills ─── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--mist);
+  color: var(--slate);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+.tag-coral {
+  background: #fff0ee;
+  color: var(--coral);
+}
+
+.tag-gold {
+  background: #fffbea;
+  color: #b38b00;
+}
+
+.tag-green {
+  background: #edfaf3;
+  color: #1a8a4a;
+}
+
+/* ─── Rank Badge ─── */
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--ink);
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  flex-shrink: 0;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--mist);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c8cce0;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--slate);
+}
+
+/* ─── Utility ─── */
+.text-gradient {
+  background: linear-gradient(135deg, var(--coral) 0%, #ff8c00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

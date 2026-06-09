@@ -1,0 +1,54 @@
+services:
+  # ── Backend ───────────────────────────────────────────────────────────────
+  - type: web
+    name: vagabond-backend
+    env: python
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.2
+      - key: PORT
+        value: 10000
+      - key: DEBUG
+        value: false
+      - key: BACKEND_CORS_ORIGINS
+        value: '["http://localhost:3000","https://vagabond-frontend.onrender.com"]'
+      # ── Appwrite (fill these in from your Appwrite console) ──
+      - key: APPWRITE_ENDPOINT
+        value: https://cloud.appwrite.io/v1
+      - key: APPWRITE_PROJECT_ID
+        value: YOUR_PROJECT_ID          # ← replace
+      - key: APPWRITE_API_KEY
+        value: YOUR_API_KEY             # ← replace
+      - key: APPWRITE_DATABASE_ID
+        value: vagabond
+      - key: APPWRITE_UNI_COL_ID
+        value: universities
+      - key: APPWRITE_SCH_COL_ID
+        value: scholarships
+      - key: APPWRITE_META_COL_ID
+        value: meta
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
+
+  # ── Frontend ──────────────────────────────────────────────────────────────
+  - type: web
+    name: vagabond-frontend
+    env: node
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: https://vagabond-backend.onrender.com/api/v1
+      - key: NODE_VERSION
+        value: 22.12.0
+      - key: PORT
+        value: 3000
+    autoDeploy: true

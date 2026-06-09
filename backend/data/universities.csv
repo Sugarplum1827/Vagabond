@@ -1,0 +1,22 @@
+id,name,country,city,qs_ranking,min_gpa_4_0,ielts_requirement,tuition_eur,total_cost_eur,acceptance_rate,filipino_acceptance_rate,programs_offered,fields_offered,application_portal_url
+1,Technical University of Munich,Germany,Munich,50,3.5,6.5,0,9000,78,75,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Natural Sciences']",https://www.tum.de/en/studies/application
+2,RWTH Aachen University,Germany,Aachen,106,3.3,6.5,0,8500,80,76,"['Bachelor', 'Master', 'PhD']","['Engineering', 'Computer Science', 'Business']",https://www.rwth-aachen.de/go/id/du
+3,Heidelberg University,Germany,Heidelberg,87,3.4,6.5,0,8000,75,70,"['Bachelor', 'Master', 'PhD']","['Medicine', 'Natural Sciences', 'Social Sciences']",https://www.uni-heidelberg.de/en/study/all-study-programmes
+4,University of Tokyo,Japan,Tokyo,23,3.7,6.0,5000,15000,65,60,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Natural Sciences', 'Medicine']",https://www.u-tokyo.ac.jp/en/admissions/
+5,Kyoto University,Japan,Kyoto,46,3.6,6.0,5000,14000,68,62,"['Bachelor', 'Master', 'PhD']","['Engineering', 'Natural Sciences', 'Medicine']",https://www.kyoto-u.ac.jp/en/admissions
+6,Osaka University,Japan,Osaka,68,3.4,5.5,5000,13500,72,65,"['Bachelor', 'Master', 'PhD']","['Engineering', 'Natural Sciences', 'Medicine', 'Social Sciences']",https://www.osaka-u.ac.jp/en/admissions
+7,National University of Singapore,Singapore,Singapore,8,3.8,6.5,25000,37000,60,55,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Business', 'Medicine']",https://www.nus.edu.sg/oam/undergraduate-admissions
+8,Nanyang Technological University,Singapore,Singapore,15,3.7,6.5,23000,34000,62,58,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Business']",https://www.ntu.edu.sg/admissions
+9,KAIST,South Korea,Daejeon,41,3.6,5.5,0,7000,68,62,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Natural Sciences']",https://www.kaist.ac.kr/en/html/admission/01.html
+10,Seoul National University,South Korea,Seoul,31,3.7,6.0,4500,13000,63,58,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Medicine', 'Business']",https://www.useoul.edu/apply
+11,Delft University of Technology,Netherlands,Delft,47,3.4,6.5,17000,28000,74,70,"['Bachelor', 'Master', 'PhD']","['Engineering', 'Computer Science', 'Architecture', 'Design']",https://www.tudelft.nl/en/education/admissions
+12,University of Amsterdam,Netherlands,Amsterdam,53,3.3,6.5,12500,23000,77,73,"['Bachelor', 'Master', 'PhD']","['Business', 'Social Sciences', 'Natural Sciences', 'Law']",https://www.uva.nl/en/education/bachelor-s/admissions
+13,Aalto University,Finland,Espoo,112,3.3,6.5,12000,21000,75,70,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Business', 'Design']",https://www.aalto.fi/en/admissions
+14,University of Helsinki,Finland,Helsinki,107,3.2,6.5,13000,22000,76,72,"['Bachelor', 'Master', 'PhD']","['Natural Sciences', 'Medicine', 'Social Sciences', 'Law']",https://www.helsinki.fi/en/admissions-and-education
+15,University of Edinburgh,United Kingdom,Edinburgh,27,3.6,6.5,26000,40000,58,52,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Medicine', 'Business']",https://www.ed.ac.uk/studying/undergraduate/applying
+16,University of Manchester,United Kingdom,Manchester,34,3.5,6.5,24000,37000,62,57,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Business', 'Medicine']",https://www.manchester.ac.uk/study/undergraduate/
+17,University of Toronto,Canada,Toronto,24,3.6,6.5,35000,50000,43,40,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Medicine', 'Business']",https://future.utoronto.ca/apply/
+18,University of British Columbia,Canada,Vancouver,34,3.4,6.5,32000,47000,53,50,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Business', 'Natural Sciences']",https://you.ubc.ca/applying-ubc/
+19,Australian National University,Australia,Canberra,30,3.4,6.5,28000,42000,68,63,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Natural Sciences', 'Social Sciences']",https://www.anu.edu.au/study/apply
+20,University of Melbourne,Australia,Melbourne,14,3.5,6.5,30000,44000,70,66,"['Bachelor', 'Master', 'PhD']","['Computer Science', 'Engineering', 'Medicine', 'Business']",https://study.unimelb.edu.au/apply
+21,KTH Royal Institute of Technology,Sweden,Stockholm,89,3.3,6.5,14000,23000,73,68,"['Bachelor', 'Master', 'PhD']","['Engineering', 'Computer Science', 'Architecture']",https://www.kth.se/en/studies/master/applying
