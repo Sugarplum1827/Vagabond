@@ -16,14 +16,14 @@ services:
       - key: DEBUG
         value: false
       - key: BACKEND_CORS_ORIGINS
-        value: '["http://localhost:3000","https://vagabond-frontend.onrender.com"]'
+        value: '["https://vagabond-frontend.onrender.com"]'
       # ── Appwrite (fill these in from your Appwrite console) ──
       - key: APPWRITE_ENDPOINT
         value: https://cloud.appwrite.io/v1
       - key: APPWRITE_PROJECT_ID
-        value: YOUR_PROJECT_ID          # ← replace
+        value: 6a27dff9000f1487086c          # ← replace
       - key: APPWRITE_API_KEY
-        value: YOUR_API_KEY             # ← replace
+        value: standard_a8ff1a9e701c0ff9203d7ff1523e26ce93c9f213ca6fd26bfc9a4acda5dc262ee16a080f270dfa8f9146d3b01de6eecec1735379b1c81450ffa39b81bc58c41704ad8d39aa9d15ba5b64a814c9050c74e4568e1566ef0d523459c81cab9b78a18a2a9ef2715372e8afbdd31b23058b0afcfdf5b437324ce7bef64cc585c8db89             # ← replace
       - key: APPWRITE_DATABASE_ID
         value: vagabond
       - key: APPWRITE_UNI_COL_ID
