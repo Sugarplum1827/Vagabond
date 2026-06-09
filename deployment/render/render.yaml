@@ -16,7 +16,7 @@ services:
       - key: DEBUG
         value: false
       - key: BACKEND_CORS_ORIGINS
-        value: '["http://localhost:3000","https://vagabond-frontend.onrender.com"]'
+        value: '["https://vagabond-frontend.onrender.com"]'
       # ── Appwrite (fill these in from your Appwrite console) ──
       - key: APPWRITE_ENDPOINT
         value: https://cloud.appwrite.io/v1
