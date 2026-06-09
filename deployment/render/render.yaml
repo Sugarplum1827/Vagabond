@@ -3,7 +3,7 @@ services:
   - type: web
     name: vagabond-backend
     env: python
-    region: singapore
+    region: oregon
     plan: free
     rootDir: backend
     buildCommand: pip install -r requirements.txt
@@ -16,7 +16,7 @@ services:
       - key: DEBUG
         value: false
       - key: BACKEND_CORS_ORIGINS
-        value: '["https://vagabond.onrender.com"]'
+        value: '["http://localhost:3000","https://vagabond-frontend.onrender.com"]'
       # ── Appwrite (fill these in from your Appwrite console) ──
       - key: APPWRITE_ENDPOINT
         value: https://cloud.appwrite.io/v1
@@ -37,7 +37,7 @@ services:
 
   # ── Frontend ──────────────────────────────────────────────────────────────
   - type: web
-    name: vagabond
+    name: vagabond-frontend
     env: node
     region: oregon
     plan: free
