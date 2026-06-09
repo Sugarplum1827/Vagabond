@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     PORT: int = 10000
 
     BACKEND_CORS_ORIGINS: str = (
-        '["http://localhost:3000","https://vagabond-frontend.onrender.com"]'
+        '["https://vagabond-frontend.onrender.com"]'
     )
 
     MAX_FILE_SIZE: int = 10 * 1024 * 1024
