@@ -70,10 +70,18 @@ META_ATTRS = [
 # ── Client factory ────────────────────────────────────────────────────────────
 
 def _get_db() -> Databases:
+    logger.info(
+        "Connecting to Appwrite endpoint=%s project=%s",
+        settings.APPWRITE_ENDPOINT,
+        settings.APPWRITE_PROJECT_ID,
+    )
+
     client = Client()
+
     client.set_endpoint(settings.APPWRITE_ENDPOINT)
     client.set_project(settings.APPWRITE_PROJECT_ID)
     client.set_key(settings.APPWRITE_API_KEY)
+
     return Databases(client)
 
 
@@ -184,9 +192,9 @@ def upsert_universities(records: List[Dict]):
             queries.append(Query.cursor_after(cursor))
         try:
             resp = db.list_documents(database_id=did, collection_id=cid, queries=queries)
-        except AppwriteException as e:
-            logger.error("Failed to list universities: %s", e)
-            break
+        except AppwriteException:
+          logger.exception("Failed to list universities")
+          break
         docs = resp["documents"]
         for doc in docs:
             key = (doc.get("name", "").lower(), doc.get("country", "").lower())
@@ -365,9 +373,9 @@ def load_universities(
 
         try:
             resp = db.list_documents(database_id=did, collection_id=cid, queries=queries)
-        except AppwriteException as e:
-            logger.error("load_universities query failed: %s", e)
-            break
+        except AppwriteException:
+          logger.exception("load_universities query failed")
+          break
 
         docs = resp["documents"]
         for doc in docs:
@@ -416,9 +424,9 @@ def load_scholarships(country: Optional[str] = None, limit: int = 50) -> List[Di
             queries.append(Query.cursor_after(cursor))
         try:
             resp = db.list_documents(database_id=did, collection_id=cid, queries=queries)
-        except AppwriteException as e:
-            logger.error("load_scholarships failed: %s", e)
-            break
+        except AppwriteException:
+          logger.exception("load_scholarships failed")
+          break
 
         docs = resp["documents"]
         for doc in docs:
