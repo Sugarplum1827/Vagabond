@@ -37,7 +37,7 @@ services:
 
   # ── Frontend ──────────────────────────────────────────────────────────────
   - type: web
-    name: vagabond-frontend
+    name: vagabond
     env: node
     region: oregon
     plan: free
