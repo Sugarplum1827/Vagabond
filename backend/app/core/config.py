@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     APPWRITE_ENDPOINT:       str = "https://cloud.appwrite.io/v1"
     APPWRITE_PROJECT_ID:     str = ""
     APPWRITE_API_KEY:        str = ""
-    APPWRITE_DATABASE_ID:    str = "vagabond"
+    APPWRITE_DATABASE_ID:    str = "Vagabond"
     APPWRITE_UNI_COL_ID:     str = "universities"
     APPWRITE_SCH_COL_ID:     str = "scholarships"
     APPWRITE_META_COL_ID:    str = "meta"
