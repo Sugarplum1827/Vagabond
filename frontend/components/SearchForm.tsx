@@ -7,142 +7,120 @@ interface SearchFilters {
   field: string;
   max_budget: string;
 }
-
 interface Props {
   filters: SearchFilters;
-  onChange: (filters: SearchFilters) => void;
+  onChange: (f: SearchFilters) => void;
   onSearch: () => void;
   loading: boolean;
 }
 
-const COUNTRIES = [
-  "Austria","Belgium","Czech Republic","Denmark","Finland","France","Germany",
-  "Italy","Netherlands","Norway","Poland","Portugal","Spain","Sweden",
-  "Switzerland","United Kingdom","Canada","USA","Australia","Japan",
-  "Singapore","South Korea",
-];
-
-const DEGREE_LEVELS = ["Associate","Diploma","Certificate","Bachelor","Master","PhD","Postdoc"];
-
-const FIELDS = [
-  "Architecture","Arts","Business","Computer Science","Design","Engineering",
-  "Humanities","Law","Mathematics","Medicine","Natural Sciences",
-  "Political Science","Social Sciences",
+const FILTER_GROUPS = [
+  {
+    kanji: "道", label: "REGION",
+    key: "country" as const,
+    options: [
+      { v: "", t: "All Regions" },
+      { v: "Germany", t: "Germany" },
+      { v: "Japan", t: "Japan" },
+      { v: "Singapore", t: "Singapore" },
+      { v: "South Korea", t: "South Korea" },
+      { v: "United Kingdom", t: "United Kingdom" },
+      { v: "Netherlands", t: "Netherlands" },
+      { v: "Finland", t: "Finland" },
+      { v: "Canada", t: "Canada" },
+      { v: "Australia", t: "Australia" },
+      { v: "Sweden", t: "Sweden" },
+    ],
+  },
+  {
+    kanji: "学", label: "DISCIPLINE",
+    key: "field" as const,
+    options: [
+      { v: "", t: "All Disciplines" },
+      { v: "Computer Science", t: "Computer Science" },
+      { v: "Engineering", t: "Engineering" },
+      { v: "Business", t: "Business" },
+      { v: "Medicine", t: "Medicine" },
+      { v: "Arts", t: "Arts" },
+      { v: "Law", t: "Law" },
+      { v: "Natural Sciences", t: "Natural Sciences" },
+    ],
+  },
+  {
+    kanji: "金", label: "TUITION",
+    key: "max_budget" as const,
+    options: [
+      { v: "", t: "All Tuition" },
+      { v: "0", t: "Free / €0" },
+      { v: "5000", t: "Up to €5,000" },
+      { v: "15000", t: "Up to €15,000" },
+      { v: "30000", t: "Up to €30,000" },
+      { v: "50000", t: "Up to €50,000" },
+    ],
+  },
+  {
+    kanji: "並順", label: "SORT BY",
+    key: "degree_level" as const,
+    options: [
+      { v: "", t: "Best Match" },
+      { v: "Bachelor", t: "Bachelor" },
+      { v: "Master", t: "Master" },
+      { v: "PhD", t: "PhD" },
+    ],
+  },
 ];
 
 export default function SearchForm({ filters, onChange, onSearch, loading }: Props) {
-  const update = (key: keyof SearchFilters, value: string) =>
-    onChange({ ...filters, [key]: value });
+  const update = (key: keyof SearchFilters, val: string) =>
+    onChange({ ...filters, [key]: val });
+
+  const reset = () =>
+    onChange({ query: "", country: "", degree_level: "", field: "", max_budget: "" });
 
   return (
-    <div className="card p-6">
-      {/* Section header */}
-      <div className="flex items-center gap-2 mb-5">
-        <span className="font-serif text-base text-[var(--ink-soft)] opacity-40">絞</span>
-        <h2 className="text-xs font-semibold text-[var(--ink-pale)] uppercase tracking-[0.15em]">
-          Filters
-        </h2>
+    <div className="flex flex-col gap-0">
+      {/* Vertical kanji accent */}
+      <div className="flex items-start gap-3 mb-6">
+        <div className="hidden lg:block kanji-rail text-[13px] leading-loose pt-1 opacity-35">
+          知は力なり
+        </div>
+        <div className="w-4 h-4 border border-[var(--red)] flex items-center justify-center opacity-50 mt-1">
+          <span className="font-jp text-[7px] text-[var(--red)]">智</span>
+        </div>
       </div>
 
-      <div className="brush-divider mb-5" />
+      <h2 className="font-cinzel text-[10px] font-bold tracking-[0.22em] text-[var(--ink-pale)] uppercase mb-5 border-b border-[rgba(28,21,16,0.15)] pb-3">
+        Filters
+      </h2>
 
-      {/* Keyword search */}
-      <div className="mb-4">
-        <label className="block text-[10px] font-semibold text-[var(--ink-pale)] mb-1.5 uppercase tracking-wider">
-          Search
-        </label>
-        <input
-          type="text"
-          className="form-input"
-          placeholder="e.g., Computer Science Germany…"
-          value={filters.query}
-          onChange={(e) => update("query", e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && onSearch()}
-        />
-      </div>
+      {FILTER_GROUPS.map((g) => (
+        <div key={g.key} className="mb-5">
+          <div className="flex items-baseline gap-2 mb-2">
+            <span className="font-jp text-xl font-bold text-[var(--ink)] leading-none">{g.kanji}</span>
+          </div>
+          <p className="font-cinzel text-[8px] tracking-[0.2em] text-[var(--ink-pale)] uppercase mb-2">{g.label}</p>
+          <select
+            className="filter-select"
+            value={filters[g.key]}
+            onChange={(e) => update(g.key, e.target.value)}
+          >
+            {g.options.map((o) => (
+              <option key={o.v} value={o.v}>{o.t}</option>
+            ))}
+          </select>
+        </div>
+      ))}
 
-      {/* Country */}
-      <div className="mb-4">
-        <label className="block text-[10px] font-semibold text-[var(--ink-pale)] mb-1.5 uppercase tracking-wider">
-          Country
-        </label>
-        <select
-          className="form-input"
-          value={filters.country}
-          onChange={(e) => update("country", e.target.value)}
-        >
-          <option value="">All Countries</option>
-          <optgroup label="Europe">
-            {COUNTRIES.slice(0, 16).map((c) => <option key={c} value={c}>{c}</option>)}
-          </optgroup>
-          <optgroup label="Americas">
-            {COUNTRIES.slice(16, 18).map((c) => <option key={c} value={c}>{c}</option>)}
-          </optgroup>
-          <optgroup label="Asia-Pacific">
-            {COUNTRIES.slice(18).map((c) => <option key={c} value={c}>{c}</option>)}
-          </optgroup>
-        </select>
-      </div>
-
-      {/* Degree */}
-      <div className="mb-4">
-        <label className="block text-[10px] font-semibold text-[var(--ink-pale)] mb-1.5 uppercase tracking-wider">
-          Degree Level
-        </label>
-        <select
-          className="form-input"
-          value={filters.degree_level}
-          onChange={(e) => update("degree_level", e.target.value)}
-        >
-          <option value="">All Levels</option>
-          {DEGREE_LEVELS.map((d) => <option key={d} value={d}>{d}</option>)}
-        </select>
-      </div>
-
-      {/* Field */}
-      <div className="mb-4">
-        <label className="block text-[10px] font-semibold text-[var(--ink-pale)] mb-1.5 uppercase tracking-wider">
-          Field of Study
-        </label>
-        <select
-          className="form-input"
-          value={filters.field}
-          onChange={(e) => update("field", e.target.value)}
-        >
-          <option value="">All Fields</option>
-          {FIELDS.map((f) => <option key={f} value={f}>{f}</option>)}
-        </select>
-      </div>
-
-      {/* Budget */}
-      <div className="mb-6">
-        <label className="block text-[10px] font-semibold text-[var(--ink-pale)] mb-1.5 uppercase tracking-wider">
-          Max Annual Cost (EUR)
-        </label>
-        <input
-          type="number"
-          className="form-input"
-          placeholder="e.g., 20000"
-          value={filters.max_budget}
-          onChange={(e) => update("max_budget", e.target.value)}
-          min={0}
-          step={1000}
-        />
-      </div>
-
+      {/* Reset */}
       <button
-        onClick={onSearch}
-        disabled={loading}
-        className="btn-primary w-full text-sm"
+        onClick={reset}
+        className="flex items-center gap-2 text-[10px] font-cinzel tracking-[0.15em] text-[var(--ink-pale)] uppercase hover:text-[var(--red)] transition-colors mt-2"
       >
-        {loading ? (
-          <>
-            <span className="w-3.5 h-3.5 border-2 border-[rgba(242,237,223,0.3)] border-t-[var(--parchment)] rounded-full animate-spin" />
-            Searching…
-          </>
-        ) : (
-          <>Search Universities</>
-        )}
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path d="M2 5a3 3 0 105.9.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+          <path d="M8 2.5L7.9 5.5 5 5.4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        Reset Filters
       </button>
     </div>
   );

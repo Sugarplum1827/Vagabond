@@ -2,61 +2,58 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const NAV = [
+  { href: "/",       kanji: "旅", label: "JOURNEY" },
+  { href: "/upload", kanji: "書", label: "RECORDS" },
+  { href: "/search", kanji: "道", label: "DISCOVER" },
+];
+
 export default function Header() {
-  const pathname = usePathname();
-
-  const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/upload", label: "Upload Transcript" },
-    { href: "/search", label: "Search" },
-  ];
-
+  const path = usePathname();
   return (
-    <header className="sticky top-0 z-50 border-b border-[rgba(61,53,48,0.12)]"
-      style={{ background: "rgba(242,237,223,0.92)", backdropFilter: "blur(12px)" }}>
-      <div className="page-container">
-        <div className="flex items-center justify-between h-16">
+    <header className="relative z-50 border-b border-[rgba(28,21,16,0.18)]"
+      style={{ background: "rgba(226,213,190,0.97)", backdropFilter: "blur(8px)" }}>
+      <div className="site-wrap flex items-center justify-between h-[72px]">
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            {/* Ink-drop mark */}
-            <span
-              className="w-7 h-7 flex items-center justify-center rounded-sm text-[var(--parchment)] text-xs font-serif font-bold transition-colors group-hover:bg-[var(--brush-red)]"
-              style={{ background: "var(--ink)", letterSpacing: "0.02em" }}
-            >
-              旅
-            </span>
-            <span className="font-display text-xl text-[var(--ink)] tracking-tight group-hover:text-[var(--brush-red)] transition-colors">
+        {/* Logo */}
+        <Link href="/" className="flex items-start gap-2.5 group">
+          <span className="font-jp text-4xl font-black text-[var(--ink)] leading-none">旅</span>
+          <div className="flex flex-col justify-center leading-none">
+            <span className="font-cinzel text-sm font-bold tracking-[0.22em] text-[var(--ink)] uppercase">
               Vagabond
             </span>
-            <span
-              className="text-[10px] font-mono bg-[rgba(184,150,12,0.15)] text-[#7A6200] px-2 py-0.5 rounded-sm font-semibold tracking-widest"
-            >
-              BETA
+            <span className="font-cinzel text-[9px] tracking-[0.25em] text-[var(--red)] uppercase mt-0.5">
+              Journey
             </span>
-          </Link>
+          </div>
+        </Link>
 
-          {/* Nav */}
-          <nav className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`px-4 py-2 text-sm font-medium transition-colors rounded-sm ${
-                  pathname === item.href
-                    ? "bg-[rgba(139,26,15,0.08)] text-[var(--brush-red)]"
-                    : "text-[var(--ink-pale)] hover:text-[var(--ink)] hover:bg-[rgba(26,20,16,0.05)]"
-                }`}
-              >
-                {item.label}
+        {/* Nav */}
+        <nav className="hidden md:flex items-end gap-8">
+          {NAV.map(({ href, kanji, label }) => {
+            const active = path === href || (href !== "/" && path.startsWith(href));
+            return (
+              <Link key={href} href={href} className="flex flex-col items-center gap-0.5 group">
+                <span className={`font-jp text-lg leading-none transition-colors ${
+                  active ? "text-[var(--ink)]" : "text-[var(--ink-pale)] group-hover:text-[var(--ink)]"
+                }`}>{kanji}</span>
+                <span className={`font-cinzel text-[9px] tracking-[0.2em] transition-colors ${
+                  active ? "text-[var(--ink)]" : "text-[var(--ink-pale)] group-hover:text-[var(--ink)]"
+                }`}>{label}</span>
+                {active && (
+                  <span className="block w-4 h-[1.5px] bg-[var(--red)] mt-0.5" />
+                )}
               </Link>
-            ))}
-          </nav>
+            );
+          })}
+        </nav>
 
-          {/* CTA */}
-          <Link href="/search" className="btn-primary text-sm py-2 px-5">
-            Find Universities
-          </Link>
+        {/* Profile circle */}
+        <div className="w-9 h-9 rounded-full border-2 border-[var(--ink-mid)] flex items-center justify-center cursor-pointer hover:border-[var(--red)] transition-colors">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="5.5" r="2.5" stroke="currentColor" strokeWidth="1.5"/>
+            <path d="M2.5 14c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
         </div>
       </div>
     </header>

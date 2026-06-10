@@ -2,22 +2,17 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Vagabond — Search Universities Worldwide",
-  description:
-    "Search scholarships & universities worldwide for Filipino students. Upload your transcript, find your GPA, discover matching universities.",
-  keywords: "Filipino students, university search, scholarships, study abroad, GPA",
+  title: "Vagabond — Forge Your Path Beyond Borders",
+  description: "Upload your transcript and discover universities worldwide for Filipino students. Free, private, and instant.",
+  keywords: "Filipino students, university search, scholarships, study abroad, GPA, transcript",
   openGraph: {
-    title: "Vagabond — Search Universities Worldwide",
-    description: "Search scholarships & universities worldwide for Filipino students.",
+    title: "Vagabond — Forge Your Path Beyond Borders",
+    description: "Upload your transcript and discover universities worldwide.",
     type: "website",
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>{children}</body>
