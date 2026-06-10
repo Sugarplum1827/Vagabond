@@ -12,13 +12,13 @@ function SkeletonCard() {
   return (
     <div className="card p-6 animate-pulse">
       <div className="flex gap-4">
-        <div className="w-10 h-10 rounded-lg loading-shimmer flex-shrink-0" />
+        <div className="w-10 h-10 rounded-sm loading-shimmer flex-shrink-0" />
         <div className="flex-1 space-y-3">
-          <div className="h-5 loading-shimmer rounded w-2/3" />
-          <div className="h-4 loading-shimmer rounded w-1/3" />
+          <div className="h-4 loading-shimmer rounded-sm w-2/3" />
+          <div className="h-3 loading-shimmer rounded-sm w-1/3" />
           <div className="flex gap-2">
-            <div className="h-6 w-20 loading-shimmer rounded-full" />
-            <div className="h-6 w-20 loading-shimmer rounded-full" />
+            <div className="h-5 w-16 loading-shimmer rounded-sm" />
+            <div className="h-5 w-16 loading-shimmer rounded-sm" />
           </div>
         </div>
       </div>
@@ -28,19 +28,10 @@ function SkeletonCard() {
 
 function countryFlag(country: string): string {
   const flags: Record<string, string> = {
-    Germany: "🇩🇪",
-    Japan: "🇯🇵",
-    Singapore: "🇸🇬",
-    "South Korea": "🇰🇷",
-    "United Kingdom": "🇬🇧",
-    UK: "🇬🇧",
-    Netherlands: "🇳🇱",
-    Finland: "🇫🇮",
-    Canada: "🇨🇦",
-    Australia: "🇦🇺",
-    Sweden: "🇸🇪",
-    Norway: "🇳🇴",
-    Denmark: "🇩🇰",
+    Germany: "🇩🇪", Japan: "🇯🇵", Singapore: "🇸🇬",
+    "South Korea": "🇰🇷", "United Kingdom": "🇬🇧", UK: "🇬🇧",
+    Netherlands: "🇳🇱", Finland: "🇫🇮", Canada: "🇨🇦",
+    Australia: "🇦🇺", Sweden: "🇸🇪", Norway: "🇳🇴", Denmark: "🇩🇰",
   };
   return flags[country] || "🌍";
 }
@@ -54,9 +45,7 @@ export default function Results({ universities, total, loading, userGPA }: Props
   if (loading) {
     return (
       <div className="space-y-4">
-        {[1, 2, 3].map((i) => (
-          <SkeletonCard key={i} />
-        ))}
+        {[1, 2, 3].map((i) => <SkeletonCard key={i} />)}
       </div>
     );
   }
@@ -64,9 +53,9 @@ export default function Results({ universities, total, loading, userGPA }: Props
   if (universities.length === 0) {
     return (
       <div className="card p-12 text-center">
-        <span className="text-5xl block mb-4">🔍</span>
-        <h3 className="text-lg font-semibold text-[#0d0d14] mb-2">No universities found</h3>
-        <p className="text-sm text-[#6b7a99]">
+        <span className="font-serif text-5xl block mb-4 text-[var(--ink)] opacity-20">探</span>
+        <h3 className="font-serif font-semibold text-[var(--ink)] mb-2">No universities found</h3>
+        <p className="text-sm text-[var(--ink-pale)]">
           Try removing some filters, or broaden your search.
         </p>
       </div>
@@ -75,14 +64,15 @@ export default function Results({ universities, total, loading, userGPA }: Props
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-4">
-        <p className="text-sm font-medium text-[#6b7a99]">
-          <span className="font-bold text-[#0d0d14] text-base">{total}</span> universities found
+      <div className="flex items-center justify-between mb-5">
+        <p className="text-sm text-[var(--ink-pale)]">
+          <span className="font-serif font-bold text-[var(--ink)] text-base">{total}</span>{" "}
+          universities found
         </p>
         {userGPA && (
-          <div className="flex items-center gap-2 bg-[#fffbea] border border-[#f5c842] text-[#7a6000] text-xs font-semibold px-3 py-1.5 rounded-full">
-            <span>🎯</span>
-            <span>Your GPA: {userGPA}</span>
+          <div className="flex items-center gap-2 bg-[rgba(184,150,12,0.1)] border border-[rgba(184,150,12,0.25)] text-[#7A6200] text-xs font-semibold px-3 py-1.5 rounded-sm">
+            <span className="font-serif">合</span>
+            <span>GPA: {userGPA}</span>
           </div>
         )}
       </div>
@@ -96,6 +86,7 @@ export default function Results({ universities, total, loading, userGPA }: Props
           return (
             <div key={uni.id} className="card p-6 animate-fade-up">
               <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+
                 {/* Rank badge */}
                 {uni.qs_ranking && (
                   <div className="rank-badge">
@@ -106,63 +97,57 @@ export default function Results({ universities, total, loading, userGPA }: Props
                 {/* Main info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <h3 className="font-semibold text-[#0d0d14] text-lg leading-tight">
+                    <h3 className="font-serif font-semibold text-[var(--ink)] text-base leading-tight">
                       {uni.name}
                     </h3>
                     {!gpaUnknown && (
-                      <span
-                        className={`tag text-xs ${
-                          qualifies ? "tag-green" : "tag-coral"
-                        }`}
-                      >
-                        {qualifies ? "✅ You qualify" : "⚠️ GPA too low"}
+                      <span className={`tag text-xs ${qualifies ? "tag-green" : "tag-coral"}`}>
+                        {qualifies ? "✓ You qualify" : "✗ GPA too low"}
                       </span>
                     )}
                   </div>
 
-                  <p className="text-sm text-[#6b7a99] mb-3">
+                  <p className="text-xs text-[var(--ink-pale)] mb-3 tracking-wide">
                     {countryFlag(uni.country)} {uni.city}, {uni.country}
                   </p>
 
                   {/* Stats row */}
-                  <div className="flex flex-wrap gap-3 mb-4">
+                  <div className="flex flex-wrap gap-5 mb-4">
                     {uni.min_gpa_4_0 && (
-                      <div className="text-center">
-                        <p className="text-xs text-[#9ba3be] uppercase tracking-wider">Min GPA</p>
-                        <p className="font-semibold text-[#0d0d14] text-sm">{uni.min_gpa_4_0}</p>
+                      <div>
+                        <p className="text-[10px] text-[var(--mist)] uppercase tracking-wider font-medium">Min GPA</p>
+                        <p className="font-serif font-semibold text-[var(--ink)] text-sm mt-0.5">{uni.min_gpa_4_0}</p>
                       </div>
                     )}
                     {uni.ielts_requirement && (
-                      <div className="text-center">
-                        <p className="text-xs text-[#9ba3be] uppercase tracking-wider">IELTS</p>
-                        <p className="font-semibold text-[#0d0d14] text-sm">{uni.ielts_requirement}</p>
+                      <div>
+                        <p className="text-[10px] text-[var(--mist)] uppercase tracking-wider font-medium">IELTS</p>
+                        <p className="font-serif font-semibold text-[var(--ink)] text-sm mt-0.5">{uni.ielts_requirement}</p>
                       </div>
                     )}
                     {uni.acceptance_rate && (
-                      <div className="text-center">
-                        <p className="text-xs text-[#9ba3be] uppercase tracking-wider">Acceptance</p>
-                        <p className="font-semibold text-[#0d0d14] text-sm">{uni.acceptance_rate}%</p>
+                      <div>
+                        <p className="text-[10px] text-[var(--mist)] uppercase tracking-wider font-medium">Acceptance</p>
+                        <p className="font-serif font-semibold text-[var(--ink)] text-sm mt-0.5">{uni.acceptance_rate}%</p>
                       </div>
                     )}
                     {uni.filipino_acceptance_rate && (
-                      <div className="text-center">
-                        <p className="text-xs text-[#9ba3be] uppercase tracking-wider">PH Accept.</p>
-                        <p className="font-semibold text-[#0d0d14] text-sm">{uni.filipino_acceptance_rate}%</p>
+                      <div>
+                        <p className="text-[10px] text-[var(--mist)] uppercase tracking-wider font-medium">PH Accept.</p>
+                        <p className="font-serif font-semibold text-[var(--ink)] text-sm mt-0.5">{uni.filipino_acceptance_rate}%</p>
                       </div>
                     )}
                   </div>
 
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-1.5 mb-4">
                     {uni.tuition_eur !== null && (
                       <span className={`tag ${tuitionFree ? "tag-green" : ""}`}>
-                        💰 {tuitionFree ? "Free tuition" : `€${(uni.tuition_eur || 0).toLocaleString()}/yr tuition`}
+                        {tuitionFree ? "Free tuition" : `€${(uni.tuition_eur || 0).toLocaleString()}/yr`}
                       </span>
                     )}
                     {uni.total_cost_eur && (
-                      <span className="tag">
-                        🏠 {costLabel(uni.total_cost_eur)} total
-                      </span>
+                      <span className="tag">{costLabel(uni.total_cost_eur)} total</span>
                     )}
                     {uni.programs_offered?.map((p) => (
                       <span key={p} className="tag">{p}</span>
@@ -178,7 +163,7 @@ export default function Results({ universities, total, loading, userGPA }: Props
                       href={uni.application_portal_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary text-sm py-2 px-4 inline-flex"
+                      className="btn-primary text-xs py-2 px-4 inline-flex"
                     >
                       Apply at {uni.name.split(" ")[0]} →
                     </a>

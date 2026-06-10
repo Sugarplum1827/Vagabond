@@ -31,13 +31,11 @@ export default function SearchPage() {
   const [error, setError] = useState("");
   const [userGPA, setUserGPA] = useState<number | null>(null);
 
-  // Load GPA from localStorage (set by upload page)
   useEffect(() => {
     const stored = localStorage.getItem("vagabond_gpa");
     if (stored) setUserGPA(parseFloat(stored));
   }, []);
 
-  // Ping backend to wake it up on free tier, then load all universities
   useEffect(() => {
     const init = async () => {
       setWaking(true);
@@ -81,30 +79,35 @@ export default function SearchPage() {
       <Header />
       <main className="flex-1 py-10 px-4">
         <div className="page-container">
+
           {/* Page header */}
           <div className="mb-8">
-            <p className="text-xs font-semibold text-[#ff5c47] uppercase tracking-widest mb-2">
-              University Search
-            </p>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-5 h-px bg-[var(--brush-red)] opacity-50" />
+              <p className="text-[10px] font-mono text-[var(--brush-red)] uppercase tracking-[0.2em]">
+                University Search
+              </p>
+            </div>
             <div className="flex flex-col sm:flex-row sm:items-end gap-4">
               <div>
-                <h1 className="font-display text-4xl text-[#0d0d14]">
+                <h1 className="font-display text-4xl text-[var(--ink)] leading-tight">
                   Find your university
                 </h1>
-                <p className="text-[#6b7a99] mt-1">
+                <p className="text-sm text-[var(--ink-pale)] mt-1.5">
                   Filter by country, degree level, field, and budget.
                 </p>
               </div>
 
               {userGPA && (
-                <div className="sm:ml-auto flex items-center gap-3 bg-[#fffbea] border border-[#f5c842] text-[#7a6000] px-4 py-2.5 rounded-xl">
+                <div className="sm:ml-auto flex items-center gap-3 px-4 py-2.5 rounded-sm"
+                  style={{ background: "rgba(184,150,12,0.08)", border: "1px solid rgba(184,150,12,0.2)" }}>
                   <div>
-                    <p className="text-xs text-[#b38b00]">Your GPA</p>
-                    <p className="font-bold text-lg leading-none">{userGPA}</p>
+                    <p className="text-[10px] text-[#9A7A00] uppercase tracking-wider font-medium">Your GPA</p>
+                    <p className="font-serif font-bold text-lg text-[#7A6200] leading-none mt-0.5">{userGPA}</p>
                   </div>
                   <button
                     onClick={clearGPA}
-                    className="text-[#b38b00] hover:text-[#7a6000] text-lg leading-none"
+                    className="text-[#B8960C] hover:text-[#7A6200] text-lg leading-none ml-1"
                     title="Clear GPA"
                   >
                     ×
@@ -115,7 +118,7 @@ export default function SearchPage() {
               {!userGPA && (
                 <a
                   href="/upload"
-                  className="sm:ml-auto text-sm text-[#6b7a99] underline underline-offset-2 hover:text-[#ff5c47]"
+                  className="sm:ml-auto text-xs text-[var(--ink-pale)] underline underline-offset-2 hover:text-[var(--brush-red)] transition-colors"
                 >
                   Upload transcript for GPA matching →
                 </a>
@@ -123,17 +126,20 @@ export default function SearchPage() {
             </div>
           </div>
 
+          <div className="brush-divider mb-6" />
+
           {/* Waking up banner */}
           {waking && (
-            <div className="mb-4 flex items-center gap-2 bg-[#fff8e6] border border-[#f5c842] text-[#7a6000] px-4 py-3 rounded-xl text-sm">
-              <span className="w-4 h-4 border-2 border-[#f5c842] border-t-[#7a6000] rounded-full animate-spin flex-shrink-0" />
+            <div className="mb-4 flex items-center gap-3 px-4 py-3 rounded-sm text-xs"
+              style={{ background: "rgba(184,150,12,0.07)", border: "1px solid rgba(184,150,12,0.2)", color: "#7A6200" }}>
+              <span className="w-3.5 h-3.5 border-2 border-[rgba(184,150,12,0.3)] border-t-[#B8960C] rounded-full animate-spin flex-shrink-0" />
               <span>Server is waking up — this can take up to 30 seconds on the free tier…</span>
             </div>
           )}
 
           <div className="flex flex-col lg:flex-row gap-6">
-            {/* Sidebar filters */}
-            <div className="lg:w-72 flex-shrink-0">
+            {/* Sidebar */}
+            <div className="lg:w-68 flex-shrink-0" style={{ width: "272px" }}>
               <SearchForm
                 filters={filters}
                 onChange={setFilters}
@@ -145,8 +151,9 @@ export default function SearchPage() {
             {/* Results */}
             <div className="flex-1 min-w-0">
               {error && (
-                <div className="mb-4 flex items-center gap-2 bg-[#fff0ee] border border-[#ffccc7] text-[#cc2200] px-4 py-3 rounded-xl text-sm">
-                  <span>⚠️</span>
+                <div className="mb-4 flex items-center gap-3 px-4 py-3 rounded-sm text-xs"
+                  style={{ background: "rgba(139,26,15,0.06)", border: "1px solid rgba(139,26,15,0.2)", color: "var(--brush-red)" }}>
+                  <span>⚠</span>
                   <span>{error}</span>
                 </div>
               )}
