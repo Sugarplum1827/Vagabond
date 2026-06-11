@@ -49,8 +49,10 @@ export default function Header() {
         </nav>
 
         {/* Profile circle */}
-        <div className="w-9 h-9 rounded-full border-2 border-[var(--ink-mid)] flex items-center justify-center cursor-pointer hover:border-[var(--red)] transition-colors">
-          <Link href="/search" className="btn-primary text-sm py-2 px-5">
+        <div className="flex items-center justify-center">
+          <Link 
+            href="/search" 
+            className="btn-primary text-sm py-2 px-5 rounded-full border-2 border-[var(--ink-mid)] hover:border-[var(--red)] transition-colors" >
             Find Universities
           </Link>
         </div>
