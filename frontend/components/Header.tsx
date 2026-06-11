@@ -50,10 +50,9 @@ export default function Header() {
 
         {/* Profile circle */}
         <div className="w-9 h-9 rounded-full border-2 border-[var(--ink-mid)] flex items-center justify-center cursor-pointer hover:border-[var(--red)] transition-colors">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="5.5" r="2.5" stroke="currentColor" strokeWidth="1.5"/>
-            <path d="M2.5 14c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-          </svg>
+          <Link href="/search" className="btn-primary text-sm py-2 px-5">
+            Find Universities
+          </Link>
         </div>
       </div>
     </header>
