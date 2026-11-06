@@ -3,7 +3,6 @@ import { University } from "@/lib/api";
 
 interface Props {
   universities: University[];
-  total: number;
   loading: boolean;
   userGPA: number | null;
   page: number;
@@ -36,14 +35,10 @@ function countryFlag(c: string): string {
   return m[c] || "🌍";
 }
 
-function matchScore(uni: University, gpa: number | null): number {
-  if (!gpa || !uni.min_gpa_4_0) return Math.floor(65 + Math.random() * 25);
-  const ratio = gpa / uni.min_gpa_4_0;
-  return Math.min(99, Math.floor(ratio * 75 + 20));
-}
-
-export default function Results({ universities, total, loading, userGPA, page, onPage }: Props) {
+export default function Results({ universities, loading, userGPA, page, onPage }: Props) {
+  const total = universities.length;
   const totalPages = Math.ceil(total / PER_PAGE);
+  const visible = universities.slice((page - 1) * PER_PAGE, page * PER_PAGE);
 
   if (loading) {
     return <div className="space-y-3">{[1,2,3,4].map(i => <SkeletonCard key={i}/>)}</div>;
@@ -68,8 +63,10 @@ export default function Results({ universities, total, loading, userGPA, page, o
 
       {/* Cards */}
       <div className="space-y-3">
-        {universities.map((uni) => {
-          const score = matchScore(uni, userGPA);
+        {visible.map((uni) => {
+          const gpaMatch = userGPA !== null && Number.isFinite(userGPA) && uni.min_gpa_4_0 !== null
+            ? userGPA >= uni.min_gpa_4_0
+            : null;
           const tuitionFree = uni.tuition_eur === 0;
           const tuitionText = uni.tuition_eur !== null
             ? tuitionFree
@@ -80,11 +77,11 @@ export default function Results({ universities, total, loading, userGPA, page, o
           return (
             <div key={uni.id} className="uni-card p-5 flex flex-col sm:flex-row sm:items-center gap-4 anim-fade-up">
 
-              {/* Match badge */}
-              <div className="match-badge flex-shrink-0">
-                <span className="font-cinzel text-lg font-black text-[var(--red)] leading-none">{score}</span>
-                <span className="font-cinzel text-[7px] tracking-[0.15em] text-[var(--ink-pale)] uppercase">Match</span>
-              </div>
+              {gpaMatch !== null && (
+                <span className="max-w-[105px] text-xs font-semibold text-[var(--ink)]">
+                  {gpaMatch ? "Meets listed GPA" : "Below listed GPA"}
+                </span>
+              )}
 
               {/* Info */}
               <div className="flex-1 min-w-0">
@@ -103,7 +100,7 @@ export default function Results({ universities, total, loading, userGPA, page, o
                   <p className="font-jp text-[10px] text-[var(--ink-pale)] opacity-60 mb-1">{uni.name}</p>
                 )}
                 <p className="font-fell italic text-xs text-[var(--ink-pale)] mb-2">
-                  {countryFlag(uni.country)} {uni.city}, {uni.country}
+                  {countryFlag(uni.country)} {[uni.city, uni.country].filter(Boolean).join(", ")}
                 </p>
 
                 {/* Tags row */}
@@ -125,7 +122,7 @@ export default function Results({ universities, total, loading, userGPA, page, o
               <div className="flex flex-col items-end gap-2 flex-shrink-0 min-w-[130px]">
                 <div className="text-right">
                   <p className="font-cinzel text-[8px] tracking-[0.15em] text-[var(--ink-pale)] uppercase">Tuition</p>
-                  <p className="font-cinzel text-sm font-bold text-[var(--ink)]">{tuitionText} / year</p>
+                  <p className="font-cinzel text-sm font-bold text-[var(--ink)]">{tuitionText}{uni.tuition_eur !== null && " / year"}</p>
                 </div>
                 {uni.programs_offered && (
                   <div className="text-right">

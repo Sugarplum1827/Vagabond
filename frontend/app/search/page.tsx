@@ -1,10 +1,11 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SearchForm from "@/components/SearchForm";
 import Results from "@/components/Results";
-import { searchUniversities, pingBackend, University } from "@/lib/api";
+import { searchUniversities, type SearchParams, type University } from "@/lib/api";
+import { searchStarterCatalog } from "@/lib/starter-catalog";
 
 interface Filters {
   query: string;
@@ -18,11 +19,10 @@ const DEFAULT: Filters = { query: "", country: "", degree_level: "", field: "", 
 
 export default function SearchPage() {
   const [filters,        setFilters]        = useState<Filters>(DEFAULT);
-  const [unis,           setUnis]           = useState<University[]>([]);
-  const [total,          setTotal]          = useState(0);
-  const [loading,        setLoading]        = useState(false);
-  const [waking,         setWaking]         = useState(false);
-  const [error,          setError]          = useState("");
+  const [unis, setUnis] = useState<University[]>(() => searchStarterCatalog({}));
+  const [loading, setLoading] = useState(true);
+  const [usingStarterCatalog, setUsingStarterCatalog] = useState(true);
+  const request = useRef<AbortController | null>(null);
   const [gpa,            setGpa]            = useState<number | null>(null);
   const [page,           setPage]           = useState(1);
   const [sidebarOpen,    setSidebarOpen]    = useState(false);
@@ -32,38 +32,41 @@ export default function SearchPage() {
     if (s) setGpa(parseFloat(s));
   }, []);
 
-  const doSearch = useCallback(async (currentFilters: Filters, p = 1) => {
+  const doSearch = useCallback(async (currentFilters: Filters) => {
+    request.current?.abort();
+    const controller = new AbortController();
+    request.current = controller;
+    const params: SearchParams = {
+      query: currentFilters.query.trim() || undefined,
+      country: currentFilters.country || undefined,
+      degree_level: currentFilters.degree_level || undefined,
+      field: currentFilters.field || undefined,
+      max_budget: currentFilters.max_budget ? Number(currentFilters.max_budget) : undefined,
+      limit: 100,
+    };
+    const starter = searchStarterCatalog(params);
+    setUnis(starter);
+    setPage(1);
+    setUsingStarterCatalog(true);
     setLoading(true);
-    setError("");
     try {
-      const data = await searchUniversities({
-        query:        currentFilters.query        || undefined,
-        country:      currentFilters.country      || undefined,
-        degree_level: currentFilters.degree_level || undefined,
-        field:        currentFilters.field        || undefined,
-        max_budget:   currentFilters.max_budget   ? Number(currentFilters.max_budget) : undefined,
-        limit: 8,
-      });
-      setUnis(data.results);
-      setTotal(data.total);
-      setPage(p);
+      const data = await searchUniversities(params, controller.signal);
+      if (!controller.signal.aborted && data.success && data.results.length > 0) {
+        setUnis(data.results);
+        setPage(1);
+        setUsingStarterCatalog(false);
+      }
     } catch {
-      setError("Could not reach the server. Please wait a moment and try again.");
+      // Keep the starter results when the live catalog cannot be reached.
     } finally {
-      setLoading(false);
+      if (!controller.signal.aborted) setLoading(false);
     }
   }, []);
 
-  /* Boot: wake server then load */
   useEffect(() => {
-    (async () => {
-      setWaking(true);
-      await pingBackend();
-      setWaking(false);
-      doSearch(DEFAULT);
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    void doSearch(DEFAULT);
+    return () => request.current?.abort();
+  }, [doSearch]);
 
   /* Update filters state + immediately re-search */
   const handleFiltersChange = (f: Filters) => {
@@ -164,22 +167,12 @@ export default function SearchPage() {
               )}
             </div>
 
-            {/* Waking banner */}
-            {waking && (
-              <div className="mb-6 flex items-center gap-3 px-4 py-3 border border-[rgba(196,149,42,0.35)] text-xs font-cinzel tracking-wider text-[var(--gold)] max-w-2xl mx-auto"
-                style={{ background: "rgba(196,149,42,0.06)" }}>
-                <svg className="animate-spin flex-shrink-0" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5" strokeDasharray="22 6"/>
-                </svg>
-                Server is waking up — may take ~30 seconds on free tier…
-              </div>
-            )}
-
-            {error && (
-              <div className="mb-6 px-4 py-3 border border-[rgba(122,26,14,0.3)] text-xs font-cinzel text-[var(--red)] max-w-2xl mx-auto"
-                style={{ background: "rgba(122,26,14,0.05)" }}>
-                ⚠ {error}
-              </div>
+            {usingStarterCatalog && (
+              <p role="status" className="mb-6 border border-[rgba(180,155,120,0.5)] px-4 py-3 text-sm max-w-2xl mx-auto">
+                {loading ? "Checking the live catalog. " : "No live results available for this search. "}
+                Showing the starter directory. Confirm programs and costs with each university.
+                {filters.max_budget && unis.length === 0 && " Starter entries have no verified cost, so they are excluded by budget filters."}
+              </p>
             )}
 
             {/* Main grid */}
@@ -204,7 +197,7 @@ export default function SearchPage() {
                     filters={filters}
                     onChange={handleFiltersChange}
                     onSearch={handleApply}
-                    loading={loading || waking}
+                    loading={loading && unis.length === 0}
                   />
                 </div>
               </aside>
@@ -213,11 +206,10 @@ export default function SearchPage() {
               <div className="flex-1 min-w-0">
                 <Results
                   universities={unis}
-                  total={total}
-                  loading={loading || waking}
+                  loading={loading && unis.length === 0}
                   userGPA={gpa}
                   page={page}
-                  onPage={p => doSearch(filters, p)}
+                  onPage={setPage}
                 />
               </div>
             </div>

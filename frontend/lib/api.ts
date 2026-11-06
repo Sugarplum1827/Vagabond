@@ -25,7 +25,7 @@ export interface TranscriptResult {
 }
 
 export interface University {
-  id: number;
+  id: number | string;
   name: string;
   country: string;
   city: string | null;
@@ -84,7 +84,8 @@ export async function uploadTranscript(file: File): Promise<TranscriptResult> {
 }
 
 export async function searchUniversities(
-  params: SearchParams
+  params: SearchParams,
+  signal?: AbortSignal
 ): Promise<SearchResponse> {
   const cleanParams: Record<string, string | number> = {};
   for (const [k, v] of Object.entries(params)) {
@@ -94,6 +95,7 @@ export async function searchUniversities(
   }
   const res = await client.get<SearchResponse>("/universities", {
     params: cleanParams,
+    signal,
     timeout: 60000,
   });
   return res.data;

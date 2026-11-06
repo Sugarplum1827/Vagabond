@@ -1,0 +1,373 @@
+[
+  {
+    "id": 1,
+    "name": "Technical University of Munich",
+    "country": "Germany",
+    "city": "Munich",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Natural Sciences"
+    ],
+    "application_portal_url": "https://www.tum.de/en/studies/application"
+  },
+  {
+    "id": 2,
+    "name": "RWTH Aachen University",
+    "country": "Germany",
+    "city": "Aachen",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Engineering",
+      "Computer Science",
+      "Business"
+    ],
+    "application_portal_url": "https://www.rwth-aachen.de/go/id/du"
+  },
+  {
+    "id": 3,
+    "name": "Heidelberg University",
+    "country": "Germany",
+    "city": "Heidelberg",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Medicine",
+      "Natural Sciences",
+      "Social Sciences"
+    ],
+    "application_portal_url": "https://www.uni-heidelberg.de/en/study/all-study-programmes"
+  },
+  {
+    "id": 4,
+    "name": "University of Tokyo",
+    "country": "Japan",
+    "city": "Tokyo",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Natural Sciences",
+      "Medicine"
+    ],
+    "application_portal_url": "https://www.u-tokyo.ac.jp/en/admissions/"
+  },
+  {
+    "id": 5,
+    "name": "Kyoto University",
+    "country": "Japan",
+    "city": "Kyoto",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Engineering",
+      "Natural Sciences",
+      "Medicine"
+    ],
+    "application_portal_url": "https://www.kyoto-u.ac.jp/en/admissions"
+  },
+  {
+    "id": 6,
+    "name": "Osaka University",
+    "country": "Japan",
+    "city": "Osaka",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Engineering",
+      "Natural Sciences",
+      "Medicine",
+      "Social Sciences"
+    ],
+    "application_portal_url": "https://www.osaka-u.ac.jp/en/admissions"
+  },
+  {
+    "id": 7,
+    "name": "National University of Singapore",
+    "country": "Singapore",
+    "city": "Singapore",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Business",
+      "Medicine"
+    ],
+    "application_portal_url": "https://www.nus.edu.sg/oam/undergraduate-admissions"
+  },
+  {
+    "id": 8,
+    "name": "Nanyang Technological University",
+    "country": "Singapore",
+    "city": "Singapore",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Business"
+    ],
+    "application_portal_url": "https://www.ntu.edu.sg/admissions"
+  },
+  {
+    "id": 9,
+    "name": "KAIST",
+    "country": "South Korea",
+    "city": "Daejeon",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Natural Sciences"
+    ],
+    "application_portal_url": "https://www.kaist.ac.kr/en/html/admission/01.html"
+  },
+  {
+    "id": 10,
+    "name": "Seoul National University",
+    "country": "South Korea",
+    "city": "Seoul",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Medicine",
+      "Business"
+    ],
+    "application_portal_url": "https://www.useoul.edu/apply"
+  },
+  {
+    "id": 11,
+    "name": "Delft University of Technology",
+    "country": "Netherlands",
+    "city": "Delft",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Engineering",
+      "Computer Science",
+      "Architecture",
+      "Design"
+    ],
+    "application_portal_url": "https://www.tudelft.nl/en/education/admissions"
+  },
+  {
+    "id": 12,
+    "name": "University of Amsterdam",
+    "country": "Netherlands",
+    "city": "Amsterdam",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Business",
+      "Social Sciences",
+      "Natural Sciences",
+      "Law"
+    ],
+    "application_portal_url": "https://www.uva.nl/en/education/bachelor-s/admissions"
+  },
+  {
+    "id": 13,
+    "name": "Aalto University",
+    "country": "Finland",
+    "city": "Espoo",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Business",
+      "Design"
+    ],
+    "application_portal_url": "https://www.aalto.fi/en/admissions"
+  },
+  {
+    "id": 14,
+    "name": "University of Helsinki",
+    "country": "Finland",
+    "city": "Helsinki",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Natural Sciences",
+      "Medicine",
+      "Social Sciences",
+      "Law"
+    ],
+    "application_portal_url": "https://www.helsinki.fi/en/admissions-and-education"
+  },
+  {
+    "id": 15,
+    "name": "University of Edinburgh",
+    "country": "United Kingdom",
+    "city": "Edinburgh",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Medicine",
+      "Business"
+    ],
+    "application_portal_url": "https://www.ed.ac.uk/studying/undergraduate/applying"
+  },
+  {
+    "id": 16,
+    "name": "University of Manchester",
+    "country": "United Kingdom",
+    "city": "Manchester",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Business",
+      "Medicine"
+    ],
+    "application_portal_url": "https://www.manchester.ac.uk/study/undergraduate/"
+  },
+  {
+    "id": 17,
+    "name": "University of Toronto",
+    "country": "Canada",
+    "city": "Toronto",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Medicine",
+      "Business"
+    ],
+    "application_portal_url": "https://future.utoronto.ca/apply/"
+  },
+  {
+    "id": 18,
+    "name": "University of British Columbia",
+    "country": "Canada",
+    "city": "Vancouver",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Business",
+      "Natural Sciences"
+    ],
+    "application_portal_url": "https://you.ubc.ca/applying-ubc/"
+  },
+  {
+    "id": 19,
+    "name": "Australian National University",
+    "country": "Australia",
+    "city": "Canberra",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Natural Sciences",
+      "Social Sciences"
+    ],
+    "application_portal_url": "https://www.anu.edu.au/study/apply"
+  },
+  {
+    "id": 20,
+    "name": "University of Melbourne",
+    "country": "Australia",
+    "city": "Melbourne",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Computer Science",
+      "Engineering",
+      "Medicine",
+      "Business"
+    ],
+    "application_portal_url": "https://study.unimelb.edu.au/apply"
+  },
+  {
+    "id": 21,
+    "name": "KTH Royal Institute of Technology",
+    "country": "Sweden",
+    "city": "Stockholm",
+    "programs_offered": [
+      "Bachelor",
+      "Master",
+      "PhD"
+    ],
+    "fields_offered": [
+      "Engineering",
+      "Computer Science",
+      "Architecture"
+    ],
+    "application_portal_url": "https://www.kth.se/en/studies/master/applying"
+  }
+]
