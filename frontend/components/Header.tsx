@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 const NAV = [
   { href: "/",       kanji: "旅", label: "JOURNEY" },
   { href: "/upload", kanji: "書", label: "RECORDS" },
+  { href: "/planner", kanji: "計", label: "PLANNER" },
   { href: "/search", kanji: "道", label: "DISCOVER" },
 ];
 
@@ -48,8 +49,10 @@ export default function Header() {
           })}
         </nav>
 
+        <Link href="/planner" className="btn-outline md:hidden">Planner</Link>
+
         {/* Profile circle */}
-        <div className="w-9 h-9 rounded-full border-2 border-[var(--ink-mid)] flex items-center justify-center cursor-pointer hover:border-[var(--red)] transition-colors">
+        <div className="hidden md:flex w-9 h-9 rounded-full border-2 border-[var(--ink-mid)] items-center justify-center">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <circle cx="8" cy="5.5" r="2.5" stroke="currentColor" strokeWidth="1.5"/>
             <path d="M2.5 14c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>

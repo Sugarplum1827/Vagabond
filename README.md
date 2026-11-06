@@ -8,6 +8,12 @@ No account required. No cost. Transcript deleted immediately after extraction.
 
 ---
 
+## Application planner
+
+Open `/planner` to browse curated degree programs and scholarships by region and degree level. Save a shortlist, compare funding, record a planned submission date, check document validity, and track requirements and application stages. Plans are stored in the current browser. The planner runs without the Appwrite backend.
+
+Edit `frontend/lib/opportunities.ts` to publish a new intake. Keep the official source and review date with each record, distinguish program deadlines from scholarship deadlines, and leave unverified costs as unknown. Retain closed calls for reference, and add new intake records with separate identifiers so old checklists stay attached to the right application.
+
 ## Tech Stack
 
 | Layer | Tech |
@@ -45,8 +51,8 @@ python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-# Bootstrap university CSV
-python -c "from app.services.scraper import ScraperService; ScraperService().scrape_universities()"
+# Set APPWRITE_PROJECT_ID and APPWRITE_API_KEY for the discovery catalog.
+# Set BACKEND_CORS_ORIGINS to http://localhost:3000 for local frontend access.
 
 # Start API
 uvicorn app.main:app --reload --port 8000

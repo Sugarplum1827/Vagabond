@@ -86,7 +86,7 @@ async def upload_transcript(file: UploadFile = File(...)):
             status_code=415,
             detail=f"Unsupported file type '{file.content_type}'. Upload PDF, JPG, or PNG.",
         )
-    file_bytes = await file.read()
+    file_bytes = await file.read(MAX_FILE_SIZE + 1)
     if len(file_bytes) > MAX_FILE_SIZE:
         raise HTTPException(status_code=413, detail="File too large. Maximum size is 10 MB.")
     if len(file_bytes) == 0:
@@ -100,8 +100,7 @@ async def upload_transcript(file: UploadFile = File(...)):
     )
     grades = OCRService.parse_grades_from_text(text)
     gpa    = OCRService.calculate_gpa_4_0(grades)
-    logger.info("Transcript processed: %s | %d grades | GPA %.2f",
-                file.filename, len(grades), gpa or 0)
+    logger.info("Transcript processed")
 
     return TranscriptUploadResponse(
         success=True,

@@ -123,6 +123,7 @@ export default function Home() {
               Upload your transcript and discover universities across the world.
             </p>
             <div className="flex flex-wrap gap-4">
+              <Link href="/planner" className="btn-dark">Plan Applications</Link>
               <Link href="/upload" className="btn-dark gap-2">
                 <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                   <path d="M6.5 9V2M3 5l3.5-3L10 5M1 11h11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
